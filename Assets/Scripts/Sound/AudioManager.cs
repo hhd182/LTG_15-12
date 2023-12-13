@@ -60,7 +60,6 @@ public class AudioManager : MonoBehaviour
     }
 
     public void MusicVolume(float volume) {
-        print("Volume: " + volume);
         musicSoure.volume = volume;
     }
 
@@ -68,7 +67,13 @@ public class AudioManager : MonoBehaviour
         sfxSource.volume = volume;
     }
 
+    public float GetMusicVolume() {
+        return musicSoure.volume;
+    }
 
+    public float GetSFXVolume() {
+        return sfxSource.volume;
+    }
 
 
 }

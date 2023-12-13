@@ -18,6 +18,30 @@ public class SceneManager : MonoBehaviour
 
     void Start()
     {
+        float musicVolume = AudioManager.Instance.GetMusicVolume();
+        float sfxVolume = AudioManager.Instance.GetSFXVolume();
+
+        musicSLider.value = musicVolume;
+        sfxSlider.value = sfxVolume;
+
+        if (AudioManager.Instance.musicPlaying) {
+            musicOn.gameObject.SetActive(true);
+            musicOff.gameObject.SetActive(false);
+        }
+        else {
+            musicOn.gameObject.SetActive(false);
+            musicOff.gameObject.SetActive(true);
+        }
+
+        if (AudioManager.Instance.sfxPlaying) {
+            sfxOn.gameObject.SetActive(true);
+            sfxOff.gameObject.SetActive(false);
+        }
+        else {
+            sfxOn.gameObject.SetActive(false);
+            sfxOff.gameObject.SetActive(true);
+        }
+
         settingScreen.SetActive(false); 
         firstTimeScreen.SetActive(false);
         highScroceScreen.SetActive(false);
@@ -68,7 +92,6 @@ public class SceneManager : MonoBehaviour
     }
 
     public void MusicVolume() {
-        print(musicSLider.value);
         AudioManager.Instance.MusicVolume(musicSLider.value);
     }
 

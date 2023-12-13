@@ -113,9 +113,9 @@ TextureImporter:
       name: GUI_0
       rect:
         serializedVersion: 2
-        x: 8
+        x: 135
         y: 293
-        width: 172
+        width: 45
         height: 7
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -135,9 +135,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 6
-        y: 258
-        width: 115
-        height: 24
+        y: 279
+        width: 49
+        height: 3
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2062,6 +2062,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: GUI_93
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 295
+        width: 42
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43ba4e9483bb8af49a21f8b8d862b73d
+      internalID: -504475508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GUI_94
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 295
+        width: 42
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fa763af955ed1747b8fcae9d6ad1ef7
+      internalID: 1818347306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GUI_95
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 279
+        width: 49
+        height: 3
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c412a52c6f70e24ca850c36cfcb14ea
+      internalID: 1773854614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2166,6 +2229,9 @@ TextureImporter:
       GUI_90: 1313240884
       GUI_91: 1008321862
       GUI_92: -70249948
+      GUI_93: -504475508
+      GUI_94: 1818347306
+      GUI_95: 1773854614
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
