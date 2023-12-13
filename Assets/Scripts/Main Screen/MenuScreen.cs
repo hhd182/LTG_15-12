@@ -2,34 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+
 
 public class SceneManager : MonoBehaviour
 {
-    public GameObject mainScreen;
-    public GameObject settingScreen;
-    public GameObject firstTimeScreen;
-    public GameObject highScroceScreen;
+    public GameObject mainScreen, settingScreen, firstTimeScreen, highScroceScreen;
 
-    public Button musicOn;
-    public Button musicOff;
-    public Button btnYes;
-    public Button btnNo;
+    public Button musicOn, musicOff, sfxOn, sfxOff, btnYes, btnNo;
 
-    public AudioSource src;
-    public AudioClip sound1;
-    public AudioClip sfx1;
-    
+    public Slider musicSLider, sfxSlider;
 
-    private bool isEnableSound = true;
+  
 
-    
     void Start()
     {
         settingScreen.SetActive(false); 
         firstTimeScreen.SetActive(false);
         highScroceScreen.SetActive(false);
-        src.clip = sound1;
-        DoSound();
+      
     }
 
     // Update is called once per frame
@@ -39,6 +31,7 @@ public class SceneManager : MonoBehaviour
     }
 
     public void DoOpenScene(GameObject screen) {
+        AudioManager.Instance.PlaySFX("Click Sound");
         screen.SetActive(true);
         mainScreen.SetActive(false);
     }
@@ -50,18 +43,45 @@ public class SceneManager : MonoBehaviour
         highScroceScreen.SetActive(false);
     }
 
-    public void SetSound() {
-        isEnableSound = !isEnableSound;
-        DoSound();
-    }
-
-    public void DoSound() {
-        if(isEnableSound == true) {
-            src.Play();
+    public void ToggleMusic() {
+        AudioManager.Instance.ToggleMusic();
+        if(AudioManager.Instance.musicPlaying) {
+           musicOn.gameObject.SetActive(true);
+           musicOff.gameObject.SetActive(false);
         }
         else {
-            src.Pause();
+            musicOn.gameObject.SetActive(false);
+            musicOff.gameObject.SetActive(true);
         }
     }
+
+    public void ToggleSFX() {
+        AudioManager.Instance.ToggleSFX();
+        if (AudioManager.Instance.sfxPlaying) {
+            sfxOn.gameObject.SetActive(true);
+            sfxOff.gameObject.SetActive(false);
+        }
+        else {
+            sfxOn.gameObject.SetActive(false);
+            sfxOff.gameObject.SetActive(true);
+        }
+    }
+
+    public void MusicVolume() {
+        print(musicSLider.value);
+        AudioManager.Instance.MusicVolume(musicSLider.value);
+    }
+
+    public void SFXVolume() {
+        AudioManager.Instance.SFXVolume(sfxSlider.value);
+    }
+
+    public void ChangeScene(string screenName) {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(screenName);
+        AudioManager.Instance.PlayMusic("Chapter 1");
+    }
+
+
+
 
 }
