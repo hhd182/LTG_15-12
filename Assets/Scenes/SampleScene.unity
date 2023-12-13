@@ -400,7 +400,6 @@ MonoBehaviour:
   player: {fileID: 1678331194}
   speed: 1
   detectRange: 3
-  disLimit: 1
   maxReturnDistance: 4
 --- !u!50 &377943874
 Rigidbody2D:
@@ -1817,10 +1816,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1b2cc436679b047b4183f4d10b11e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalSpeed: 2
-  boostedSpeed: 4
+  speed1: 2
+  speed2: 3
+  speed3: 4
   fitnessDecreaseRate: 5
-  fitnessThreshold: 10
   fitnessRecover: 2
   flashlightDecreaseRate: 5
 --- !u!114 &1678331199
@@ -1832,10 +1831,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1678331192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72241a9942451fc4f972ce6f6be1ac89, type: 3}
+  m_Script: {fileID: 11500000, guid: 756e4a49e3075eb449dcd8ede8e12c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 6
+  invincibilityTime: 1
 --- !u!1 &1682400330
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,7 +2055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861e59a877e42864685f5cf151ced108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healAmount: 20
+  healAmount: 1
 --- !u!1001 &1832678952
 PrefabInstance:
   m_ObjectHideFlags: 0

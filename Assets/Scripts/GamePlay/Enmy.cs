@@ -6,7 +6,6 @@ public class Enemy : MonoBehaviour
     public Transform player;
     public float speed;
     public float detectRange = 5f; // Khoảng cách
-    public float disLimit = 1f;
     public float maxReturnDistance = 5f;
 
 
@@ -23,12 +22,22 @@ public class Enemy : MonoBehaviour
         EnmyMove();
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<PlayerHealth>().EnmyDame();
+            Debug.Log("DMM player =)))");
+        }
+    }
+
+
     public void EnmyMove()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         float distanceToOriginal = Vector3.Distance(transform.position, originalPosition);
 
-        if (distanceToPlayer <= detectRange && distanceToOriginal < maxReturnDistance)
+        if (distanceToPlayer <= detectRange && distanceToOriginal <= maxReturnDistance)
         {
             isFollowPlayer = true;
             FollowPlayer();
@@ -45,7 +54,7 @@ public class Enemy : MonoBehaviour
     void FollowPlayer()
     {
         Vector3 direction = (player.position - transform.position).normalized;
-        Vector3 target = player.position - direction * disLimit;
+        Vector3 target = player.position - direction * Mathf.Epsilon;
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
     }
 

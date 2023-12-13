@@ -11,7 +11,6 @@ public class FlashlightItem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.GetComponent<Player>().RecoverFlashlight(flashlightAmount);
-            gameObject.SetActive(false);
             Destroy(gameObject);
             Debug.Log("This item!!");
         }

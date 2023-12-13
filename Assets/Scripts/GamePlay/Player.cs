@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float normalSpeed = 2f;
-    public float boostedSpeed = 4f;
+    public float speed1 = 2f;
+    public float speed2 = 3f;
+    public float speed3 = 4f;
+    float currentSpeed;
+    private bool isSpeed = false;
 
-    private float fitness = 100f;   // Thể lực ban đầu
-    public float fitnessDecreaseRate = 5f;  // Giảm thể lực mỗi giây khi giữ phím Shift
-    public float fitnessThreshold = 10f;    // Ngưỡng thể lực, dưới ngưỡng này không thể sử dụng tốc độ tăng
-    public float fitnessRecover = 2;    // Hồi thể lực trên giây
+
+
+    private float fitness = 20f;   // Thể lực ban đầu
+    public float fitnessDecreaseRate = 1f;  // Giảm thể lực mỗi giây khi giữ phím Shift
+    public float fitnessRecover = 1f;    // Hồi thể lực trên giây
 
     private float flashlight = 100f; // Đèn pin
     public float flashlightDecreaseRate = 5f; // Giảm pin mỗi giây
@@ -18,7 +22,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
+        currentSpeed = speed1;
     }
 
     void Update()
@@ -30,16 +34,21 @@ public class Player : MonoBehaviour
 
     public void PlayerMove()
     {
-
-        float currentSpeed;
-
-        if (Input.GetKey(KeyCode.LeftShift) && fitness > fitnessThreshold)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isSpeed && fitness > 0)
         {
-            currentSpeed = boostedSpeed;
+            isSpeed = false;
+            setSpeed();
         }
-        else
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            currentSpeed = normalSpeed;
+            isSpeed = false;
+            currentSpeed = speed1;
+        }
+
+        if (fitness <= 0)
+        {
+            currentSpeed = speed1;
         }
 
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -50,9 +59,34 @@ public class Player : MonoBehaviour
 
     }
 
+    public void setSpeed()
+    {
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (fitness >= 15)
+            {
+                currentSpeed = speed3;
+                Debug.Log("I'm soo strongg");
+            }
+            else if (fitness >= 2)
+            {
+                currentSpeed = speed2;
+                Debug.Log("I'm normal");
+            }
+            else
+            {
+                currentSpeed = speed1;
+                Debug.Log("I can't do it...");
+            }
+        }
+        
+    }
+
+
     public void PlayerFitness()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && fitness > fitnessThreshold && (Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
+        if (Input.GetKey(KeyCode.LeftShift) && fitness > 0 && (Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
         {
             fitness -= fitnessDecreaseRate * Time.deltaTime;
 
@@ -61,24 +95,24 @@ public class Player : MonoBehaviour
                 fitness = 0;
             }
         }
-        
-        if(!Input.GetKey(KeyCode.LeftShift))
+
+        if (!Input.GetKey(KeyCode.LeftShift))
         {
             fitness += fitnessRecover * Time.deltaTime;
 
-            if (fitness > 100)
+            if (fitness > 20)
             {
-                fitness = 100;
+                fitness = 20;
             }
         }
     }
 
-    public void RecoverFitness (int amount)
+    public void RecoverFitness(int amount)
     {
         fitness += amount;
-        if (fitness > 100)
+        if (fitness > 20)
         {
-            fitness = 100;
+            fitness = 20;
         }
         Debug.Log("Player fitness!" + fitness);
 
@@ -102,7 +136,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void RecoverFlashlight (int amount)
+    public void RecoverFlashlight(int amount)
     {
         flashlight += amount;
         if (flashlight > 100)
