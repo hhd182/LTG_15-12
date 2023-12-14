@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameObject staminaBar;
+    public GameObject batteryBar;
+    public GameObject vision;
+
     public float speed1 = 2f;
     public float speed2 = 3f;
     public float speed3 = 4f;   
@@ -14,15 +18,18 @@ public class Player : MonoBehaviour
     public float fitnessDecreaseRate = 1f;  // Giảm thể lực mỗi giây khi giữ phím Shift
     public float fitnessRecover = 1f;    // Hồi thể lực trên giây
 
-    private float flashlight = 100f; // Đèn pin
+    private float flashightEnergy = 100f; // Đèn pin
     public float flashlightDecreaseRate = 5f; // Giảm pin mỗi giây
     private bool isFlashlight = false; // Check active
-
     public bool isSupper = false;
+
+    private Vector3 mouseWorldPosition;
 
     void Start()
     {
-
+        staminaBar.GetComponent<StaminaBar>().SetMaxStamina(fitness);
+        batteryBar.GetComponent<BatteryBar>().SetMaxEnergy(flashightEnergy);
+        isFlashlight = false;
     }
 
     void Update()
@@ -30,6 +37,7 @@ public class Player : MonoBehaviour
         PlayerMove();
         PlayerFitness();
         Flashlight();
+        SettingVision();
     }
 
     public void PlayerMove()
@@ -104,21 +112,21 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && fitness > 0 && (Input.GetButton("Horizontal") || Input.GetButton("Vertical")))
         {
             fitness -= fitnessDecreaseRate * Time.deltaTime;
-
             if (fitness < 0)
             {
                 fitness = 0;
             }
+            staminaBar.GetComponent<StaminaBar>().SetStamina(fitness);
         }
 
         if (!Input.GetKey(KeyCode.LeftShift))
         {
             fitness += fitnessRecover * Time.deltaTime;
-
             if (fitness > 20)
             {
                 fitness = 20;
             }
+            staminaBar.GetComponent<StaminaBar>().SetStamina(fitness);
         }
     }
 
@@ -129,36 +137,40 @@ public class Player : MonoBehaviour
         {
             fitness = 20;
         }
+        staminaBar.GetComponent<StaminaBar>().SetStamina(fitness);
         Debug.Log("Player fitness!" + fitness);
 
     }
 
     public void Flashlight()
     {
-        if (Input.GetMouseButtonDown(1) && flashlight > 0)
+        if (Input.GetMouseButtonDown(1) && flashightEnergy > 0)
         {
             isFlashlight = !isFlashlight;
         }
 
         if (isFlashlight)
         {
-            flashlight -= flashlightDecreaseRate * Time.deltaTime;
+            flashightEnergy -= flashlightDecreaseRate * Time.deltaTime;
 
-            if (flashlight < 0)
+            if (flashightEnergy < 0)
             {
-                flashlight = 0;
+                flashightEnergy = 0;
+                isFlashlight = false;
             }
+            batteryBar.GetComponent<BatteryBar>().SetEnergy(flashightEnergy);
         }
     }
 
     public void RecoverFlashlight(int amount)
     {
-        flashlight += amount;
-        if (flashlight > 100)
+        flashightEnergy += amount;
+        if (flashightEnergy > 100)
         {
-            flashlight = 100;
+            flashightEnergy = 100;
         }
-        Debug.Log("Player flashlight!" + flashlight);
+        batteryBar.GetComponent<BatteryBar>().SetEnergy(flashightEnergy);
+        Debug.Log("Player flashlight!" + flashightEnergy);
     }
 
     public void HandleSpeed()
@@ -175,5 +187,15 @@ public class Player : MonoBehaviour
         speed1 *= 2f;
         speed2 *= 2f;
         speed3 *= 2f;
+    }
+
+    private void SettingVision() {
+        vision.gameObject.SetActive(isFlashlight);
+    }
+
+    void RotateCharacter() {
+        Vector2 lookDirection = mouseWorldPosition - transform.position;
+        float lookAngle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(lookAngle, Vector3.forward);
     }
 }

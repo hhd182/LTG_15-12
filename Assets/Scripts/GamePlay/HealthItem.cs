@@ -8,7 +8,7 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerHealth>().Heal(healAmount);
+            other.GetComponent<PlayerHealth>().Healing(healAmount);
             Destroy(gameObject);
             Debug.Log("This item!!");
         }
