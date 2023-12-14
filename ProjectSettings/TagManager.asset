@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - wall
+  - Wall
+  - Item
+  - Enmy
+  - Trap
   layers:
   - Default
   - TransparentFX
