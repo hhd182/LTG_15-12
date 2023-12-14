@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float maxHealth = 6f;
-    private float currentHealth;
+    public GameObject heartBar;
+
+    public int maxHealth = 5;
+    [SerializeField] private int currentHealth = 3;
 
     public float invincibilityTime = 5f; // Thời gian bất tử sau khi nhận sát thương
     private bool isInvincible; // Trạng thái bất tử
 
     private void Start()
     {
-        currentHealth = 3;
-        isInvincible=false;
+        heartBar.GetComponent<Health>().SetMaxHealth(maxHealth);
+        heartBar.GetComponent<Health>().SetHealth(currentHealth);
+        isInvincible =false;
     }
 
-    public void Heal(int amount)
+    public void Healing(int amount)
     {
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        heartBar.GetComponent<Health>().SetHealth(currentHealth);
         Debug.Log("Current Health: " + currentHealth);
     }
 
@@ -32,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 currentHealth = 0;
             }
+            heartBar.GetComponent<Health>().SetHealth(currentHealth);
             Debug.Log("Current Health: " + currentHealth);
             Debug.Log("Anh dang bat tu ehe");
             isInvincible = true;
