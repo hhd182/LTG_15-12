@@ -6,11 +6,9 @@ public class Player : MonoBehaviour
 {
     public float speed1 = 2f;
     public float speed2 = 3f;
-    public float speed3 = 4f;
-    float currentSpeed;
-    private bool isSpeed = false;
-
-
+    public float speed3 = 4f;   
+    public float currentSpeed;
+    public bool isSpeed = false;
 
     private float fitness = 20f;   // Thể lực ban đầu
     public float fitnessDecreaseRate = 1f;  // Giảm thể lực mỗi giây khi giữ phím Shift
@@ -20,9 +18,11 @@ public class Player : MonoBehaviour
     public float flashlightDecreaseRate = 5f; // Giảm pin mỗi giây
     private bool isFlashlight = false; // Check active
 
+    public bool isSupper = false;
+
     void Start()
     {
-        currentSpeed = speed1;
+
     }
 
     void Update()
@@ -34,21 +34,31 @@ public class Player : MonoBehaviour
 
     public void PlayerMove()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isSpeed && fitness > 0)
+        if (fitness > 0 && currentSpeed != 0)
         {
-            isSpeed = false;
-            setSpeed();
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                setSpeed();
+                isSpeed = true;
+            }
+        } 
+        else
+        {
+            currentSpeed = speed1;
+            if (isSupper)
+            {
+                isSupper = false;
+            }
         }
 
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            currentSpeed = speed1;
             isSpeed = false;
-            currentSpeed = speed1;
-        }
-
-        if (fitness <= 0)
-        {
-            currentSpeed = speed1;
+            if (isSupper)
+            {
+                isSupper = false;
+            }
         }
 
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -61,10 +71,15 @@ public class Player : MonoBehaviour
 
     public void setSpeed()
     {
-
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            if (fitness >= 15)
+            if (fitness == 20)
+            {
+                isSupper = true;
+                currentSpeed = speed3;
+                Debug.Log("I'm soo supperrr");
+            }
+            else  if (fitness >= 15)
             {
                 currentSpeed = speed3;
                 Debug.Log("I'm soo strongg");
@@ -144,5 +159,21 @@ public class Player : MonoBehaviour
             flashlight = 100;
         }
         Debug.Log("Player flashlight!" + flashlight);
+    }
+
+    public void HandleSpeed()
+    {
+        currentSpeed *= 0.5f;
+        speed1 *= 0.5f;
+        speed2 *= 0.5f;
+        speed3 *= 0.5f;
+    }
+
+    public void ResetSpeed()
+    {
+        currentSpeed *= 2f;
+        speed1 *= 2f;
+        speed2 *= 2f;
+        speed3 *= 2f;
     }
 }
