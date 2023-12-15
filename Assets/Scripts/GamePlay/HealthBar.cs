@@ -40,4 +40,12 @@ public class Health : MonoBehaviour
             }
         }
     }
+    
+    public void SetHealth(int health) {
+        this.health = health;
+    }
+
+    public void SetMaxHealth(int maxHealth) {
+        numOfHearts = maxHealth;
+    }
 }
