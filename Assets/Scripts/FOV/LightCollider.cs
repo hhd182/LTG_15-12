@@ -5,7 +5,7 @@ using UnityEngine;
 public class LightCollider : MonoBehaviour {
     public BoxCollider2D boxCollider2D;
     public SpriteMask mask;
-    private List<EnemyInLight> enemiesInLight = new List<EnemyInLight>();
+    private List<Enemy> enemiesInLight = new List<Enemy>();
     public LayerMask layerMask;
     private bool hasWall = false;
 
@@ -29,24 +29,21 @@ public class LightCollider : MonoBehaviour {
             }
 
         }
-
-
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Enemy")) {
-            EnemyInLight enemyInLight = other.gameObject.GetComponent<EnemyInLight>();
+            Enemy enemyInLight = other.gameObject.GetComponent<Enemy>();
             if (enemyInLight != null && !enemiesInLight.Contains(enemyInLight)) {
                 enemiesInLight.Add(enemyInLight);
                 enemyInLight.EnterLight();
-
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if (other.CompareTag("Enemy")) {
-            EnemyInLight enemyInLight = other.gameObject.GetComponent<EnemyInLight>();
+            Enemy enemyInLight = other.gameObject.GetComponent<Enemy>();
             if (enemyInLight != null && enemiesInLight.Contains(enemyInLight)) {
                 enemiesInLight.Remove(enemyInLight);
                 enemyInLight.ExitLight();

@@ -11,7 +11,7 @@ public class Trap : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Player playerScript = other.GetComponent<Player>();
-            if (playerScript.isSupper)
+            if (playerScript.isSuper)
             {
                 checkSuper = true;
             } else

@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class HealthItem : MonoBehaviour
 {
-    public int healAmount = 1;
+    public int healthAmount = 1;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            other.GetComponent<PlayerHealth>().Healing(healAmount);
+            other.GetComponent<Player>().RecoverHealth(healthAmount);
             Destroy(gameObject);
             Debug.Log("This item!!");
         }

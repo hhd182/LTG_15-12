@@ -7,7 +7,7 @@ public class BatteryBar : MonoBehaviour
 {
     public Slider enegySlider;
 
-    public void SetMaxEnergy(float energy) {
+    public void SetMaxBattery(float energy) {
         enegySlider.maxValue = energy;
         enegySlider.value = energy;
     }
