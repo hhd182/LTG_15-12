@@ -45,14 +45,6 @@ public class GameManager : MonoBehaviour
         sfxSlider.value = sfxVolume;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            SaveSystem.Instance.Load("saveSlot");
-        }
-    }
-
     public void Win()
     {
         winMenu.SetActive(true);

@@ -147,7 +147,7 @@ public class Player : MonoBehaviour, ISavable
             currentHealth--;
             if (currentHealth < 0)
             {
-                currentHealth = 0;
+                SaveSystem.Instance.Load("saveSlot");
             }
             healthBar.GetComponent<HealthBar>().SetHealth(currentHealth);
             animator.SetTrigger("Hurt");
