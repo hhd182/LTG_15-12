@@ -1,7 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class GameManager : MonoBehaviour
     public Button musicOn, musicOff, sfxOn, sfxOff;
 
     public Slider musicSlider, sfxSlider;
+
+    public UnityEngine.Rendering.Universal.Light2D globalLight;
 
     public static GameManager Instance {  get; private set; }
 
@@ -20,6 +24,9 @@ public class GameManager : MonoBehaviour
 
 
     public void Start() {
+
+        StartCoroutine(ChangeLightIntensity());
+
         float musicVolume = AudioManager.Instance.GetMusicVolume();
         float sfxVolume = AudioManager.Instance.GetSFXVolume();
 
@@ -100,6 +107,19 @@ public class GameManager : MonoBehaviour
         else {
             sfxOn.gameObject.SetActive(false);
             sfxOff.gameObject.SetActive(true);
+        }
+    }
+
+    IEnumerator ChangeLightIntensity() {
+        while (true) {
+            // Đợi 5 giây
+            
+            yield return new WaitForSeconds(10f);
+            AudioManager.Instance.PlaySFX("Thunder Sound");
+            globalLight.intensity = 1;
+
+            yield return new WaitForSeconds(0.5f);
+            globalLight.intensity = 0.04f;
         }
     }
 }

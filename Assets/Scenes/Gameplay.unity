@@ -3246,6 +3246,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7628510548292909812, guid: 792a82f78ccc69e45bd86b81322f0657, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13901,6 +13905,7 @@ MonoBehaviour:
   sfxOff: {fileID: 4983387472513035675}
   musicSlider: {fileID: 7166703241070945729}
   sfxSlider: {fileID: 1582840833540779144}
+  globalLight: {fileID: 6436803671920161887}
 --- !u!224 &165476934346034383
 RectTransform:
   m_ObjectHideFlags: 0
