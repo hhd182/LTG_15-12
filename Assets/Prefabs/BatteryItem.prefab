@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3369280617398022011}
   - component: {fileID: 4329016414218529013}
   - component: {fileID: 2458465424229412744}
-  - component: {fileID: 4430421901647937893}
   - component: {fileID: 267259799163787369}
+  - component: {fileID: 4430421901647937893}
+  - component: {fileID: 4018157977600548431}
   m_Layer: 0
   m_Name: BatteryItem
   m_TagString: Untagged
@@ -132,19 +133,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &4430421901647937893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958338082947139840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15ada510de5ca4b45a2d4364fb386d83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  batteryAmount: 20
 --- !u!95 &267259799163787369
 Animator:
   serializedVersion: 5
@@ -166,3 +154,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4430421901647937893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958338082947139840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ada510de5ca4b45a2d4364fb386d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  batteryAmount: 20
+  used: 0
+--- !u!114 &4018157977600548431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958338082947139840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4881f89f8b930e34489bbb86116ccd4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 9b1972a3-3502-4c77-8719-d01eb0dc64d3

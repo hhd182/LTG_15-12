@@ -112,22 +112,22 @@ public class Player : MonoBehaviour, ISavable
             {
                 isSuper = true;
                 currentSpeed = speed3;
-                Debug.Log("I'm soo superrr");
+
             }
             else if (stamina >= 15)
             {
                 currentSpeed = speed3;
-                Debug.Log("I'm soo strongg");
+
             }
             else if (stamina >= 2)
             {
                 currentSpeed = speed2;
-                Debug.Log("I'm normal");
+
             }
             else
             {
                 currentSpeed = speed1;
-                Debug.Log("I can't do it...");
+
             }
         }
     }
@@ -137,7 +137,7 @@ public class Player : MonoBehaviour, ISavable
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         healthBar.GetComponent<HealthBar>().SetHealth(currentHealth);
-        Debug.Log("Current Health: " + currentHealth);
+
     }
 
     public void TakeDamage()
@@ -151,8 +151,7 @@ public class Player : MonoBehaviour, ISavable
             }
             healthBar.GetComponent<HealthBar>().SetHealth(currentHealth);
             animator.SetTrigger("Hurt");
-            Debug.Log("Current Health: " + currentHealth);
-            Debug.Log("Anh dang bat tu ehe");
+
             isInvincible = true;
             Invoke("DisableInvincibility", invincibileTime);
         }
@@ -161,7 +160,7 @@ public class Player : MonoBehaviour, ISavable
     private void DisableInvincibility()
     {
         isInvincible = false;
-        Debug.Log("Het bat tu");
+
     }
 
 
@@ -196,7 +195,7 @@ public class Player : MonoBehaviour, ISavable
             stamina = 20;
         }
         staminaBar.GetComponent<StaminaBar>().SetStamina(stamina);
-        Debug.Log("Player fitness!" + stamina);
+
     }
 
     public void TurnOnFlashlight()
@@ -227,7 +226,7 @@ public class Player : MonoBehaviour, ISavable
             battery = 100;
         }
         batteryBar.GetComponent<BatteryBar>().SetEnergy(battery);
-        Debug.Log("Player flashlight!" + battery);
+
     }
 
     public void HandleSpeed()

@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BatteryItem : MonoBehaviour, ISavable
+public class KeyDoor : MonoBehaviour, ISavable
 {
-    public int batteryAmount = 20;
     public bool used = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -16,7 +15,9 @@ public class BatteryItem : MonoBehaviour, ISavable
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
 
-            collision.GetComponent<Player>().RecoverBattery(batteryAmount);
+            GameObject door = GameObject.Find("Door");
+            door.GetComponent<SpriteRenderer>().enabled = false;
+            door.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 
@@ -33,6 +34,10 @@ public class BatteryItem : MonoBehaviour, ISavable
         {
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
+
+            GameObject door = GameObject.Find("Door");
+            door.GetComponent<SpriteRenderer>().enabled = false;
+            door.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 }

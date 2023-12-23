@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, ISavable
 {
     private NavMeshAgent agent;
     private SpriteRenderer spriteRenderer;
 
     public int health;
+    public bool defeated = false;
 
     public Transform[] patrolPoints;
     private int currentPoint;
@@ -110,7 +113,6 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<Player>().TakeDamage();
-            Debug.Log("DMM player =)))");
         }
     }
 
@@ -122,7 +124,7 @@ public class Enemy : MonoBehaviour
     public void ExitLight()
     {
         isInLight = false;
-        timeInLight = 0f; // đặt lại thời gian
+        timeInLight = 0f;
     }
 
     private void SubtractHealth(int damage)
@@ -130,6 +132,23 @@ public class Enemy : MonoBehaviour
         health -= damage;
 
         if (health <= 0)
+        {
+            defeated = true;
+
+            Destroy(gameObject);
+        }
+    }
+
+    public object CaptureState()
+    {
+        return defeated;
+    }
+
+    public void RestoreState(object state)
+    {
+        defeated = (bool)state;
+
+        if (defeated)
         {
             Destroy(gameObject);
         }

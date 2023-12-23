@@ -1,16 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthItem : MonoBehaviour
+public class HealthItem : MonoBehaviour, ISavable
 {
     public int healthAmount = 1;
+    public bool used = false;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            other.GetComponent<Player>().RecoverHealth(healthAmount);
-            Destroy(gameObject);
-            Debug.Log("This item!!");
+            used = true;
+
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
+
+            collision.GetComponent<Player>().RecoverHealth(healthAmount);
+        }
+    }
+
+    public object CaptureState()
+    {
+        return used;
+    }
+
+    public void RestoreState(object state)
+    {
+        used = (bool)state;
+
+        if (used)
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 }

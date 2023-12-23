@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3685537990683433991}
   - component: {fileID: 4241496890681186801}
   - component: {fileID: 146416127461596243}
-  - component: {fileID: 7974638804400075208}
   - component: {fileID: 8000176873521505539}
+  - component: {fileID: 7974638804400075208}
+  - component: {fileID: 115807934988352795}
   m_Layer: 0
   m_Name: StaminaItem
   m_TagString: Untagged
@@ -132,19 +133,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &7974638804400075208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497264504474283974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72c50c1b5beb1d14d96652010d67189d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fitnessAmount: 20
 --- !u!95 &8000176873521505539
 Animator:
   serializedVersion: 5
@@ -166,3 +154,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7974638804400075208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497264504474283974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c50c1b5beb1d14d96652010d67189d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  staminaAmount: 10
+  used: 0
+--- !u!114 &115807934988352795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497264504474283974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4881f89f8b930e34489bbb86116ccd4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: b2f46632-33bd-4712-8064-bf615623ca24

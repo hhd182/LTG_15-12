@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameScreen : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public GameObject pauseMenu;
+    public GameObject winMenu, pauseMenu;
 
     public Button musicOn, musicOff, sfxOn, sfxOff;
 
     public Slider musicSlider, sfxSlider;
+
+    public static GameManager Instance {  get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
 
     public void Start() {
@@ -44,6 +51,12 @@ public class GameScreen : MonoBehaviour
         {
             SaveSystem.Instance.Load("saveSlot");
         }
+    }
+
+    public void Win()
+    {
+        winMenu.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void Pause() {

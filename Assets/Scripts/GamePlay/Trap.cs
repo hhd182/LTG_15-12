@@ -6,29 +6,29 @@ public class Trap : MonoBehaviour
 {
     private bool checkSuper = false;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            Player playerScript = other.GetComponent<Player>();
+            Player playerScript = collision.GetComponent<Player>();
             if (playerScript.isSuper)
             {
                 checkSuper = true;
             } else
             {
-                other.GetComponent<Player>().HandleSpeed();
+                collision.GetComponent<Player>().HandleSpeed();
             }
-            Debug.Log("This trap!!");
+
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             if (checkSuper == false)
             {
-                other.GetComponent<Player>().ResetSpeed();
+                collision.GetComponent<Player>().ResetSpeed();
             } else
             {
                 checkSuper = false;

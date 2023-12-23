@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 1861292150773101835}
   - component: {fileID: 4954824896492825161}
   - component: {fileID: 7729819141195137027}
-  - component: {fileID: 2664777595621663470}
   - component: {fileID: 5675385785632715475}
+  - component: {fileID: 2664777595621663470}
+  - component: {fileID: -9195035189560640543}
   m_Layer: 0
   m_Name: HealthItem
   m_TagString: Item
@@ -132,19 +133,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &2664777595621663470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 204637166777290683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 861e59a877e42864685f5cf151ced108, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healAmount: 1
 --- !u!95 &5675385785632715475
 Animator:
   serializedVersion: 5
@@ -166,3 +154,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2664777595621663470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204637166777290683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 861e59a877e42864685f5cf151ced108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthAmount: 1
+  used: 0
+--- !u!114 &-9195035189560640543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204637166777290683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4881f89f8b930e34489bbb86116ccd4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 3aeb0588-500f-4034-b82e-dd09267bdf6d

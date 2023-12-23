@@ -12,7 +12,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Wall
+  - 
   - Water
   - UI
   - 
@@ -48,8 +48,8 @@ TagManager:
   - name: Floor
     uniqueID: 2396736401
     locked: 0
-  - name: Player
-    uniqueID: 4076823347
+  - name: Wall
+    uniqueID: 1048263317
     locked: 0
   - name: Objects
     uniqueID: 541640693
@@ -57,6 +57,9 @@ TagManager:
   - name: Enemies
     uniqueID: 240145093
     locked: 0
-  - name: Wall
-    uniqueID: 1048263317
+  - name: Player
+    uniqueID: 4076823347
+    locked: 0
+  - name: Edge
+    uniqueID: 4154909987
     locked: 0

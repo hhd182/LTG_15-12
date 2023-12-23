@@ -166,7 +166,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -190,7 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ac7c6c5c85ec94899c27068400d686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 3
+  defeated: 0
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -198,7 +199,7 @@ MonoBehaviour:
   inRange: 0
   detectRadius: 1
   attackTimer: 0
-  maxTimer: 10
+  maxTimer: 15
   isInLight: 0
   isSpotted: 0
 --- !u!82 &7251677515827342025
@@ -213,7 +214,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2437e7374d386e24abd9c6c628179074, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.05
+  m_Volume: 0.01
   m_Pitch: 1
   Loop: 1
   Mute: 0
