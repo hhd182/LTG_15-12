@@ -14,7 +14,7 @@ public class KeyDoor : MonoBehaviour, ISavable
 
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
-
+            GetComponent<AudioSource>().Play();
             GameObject door = GameObject.Find("Door");
             door.GetComponent<SpriteRenderer>().enabled = false;
             door.GetComponent<BoxCollider2D>().enabled = false;

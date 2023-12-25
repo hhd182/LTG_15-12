@@ -147,7 +147,175 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Torch_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 0
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e93f90b7714d354b867d712cf640482
+      internalID: 604979331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Torch_1
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 0
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e6eaee7dc3738348801d2de29e601ae
+      internalID: -1969388574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Torch_2
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88db1aaf2340dab49a81920bda9ab636
+      internalID: -1684536494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Torch_3
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 0
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2068659c5a1d0ec43962fcfbaa299c30
+      internalID: -943833974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Torch_4
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 0
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d058329924886848aa67edeed2e4ac5
+      internalID: -484928227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Torch_5
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d7e38c6b4520514b909ad8745b65e4d
+      internalID: 1215814621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Torch_6
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 0
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 490fd1c503b6aa14192b57e779b2186a
+      internalID: 1521102886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Torch_7
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 0
+        width: 8
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63eee916c334d064e91b1d9bc35395a2
+      internalID: -593711864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -158,7 +326,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Torch_0: 604979331
+      Torch_1: -1969388574
+      Torch_2: -1684536494
+      Torch_3: -943833974
+      Torch_4: -484928227
+      Torch_5: 1215814621
+      Torch_6: 1521102886
+      Torch_7: -593711864
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

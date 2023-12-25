@@ -13,6 +13,7 @@ public class BatteryItem : MonoBehaviour, ISavable
         {
             used = true;
 
+            GetComponent<AudioSource>().Play();
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<BoxCollider2D>().enabled = false;
 

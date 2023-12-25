@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
 
     public UnityEngine.Rendering.Universal.Light2D globalLight;
 
+    [SerializeField] private float intensityMin = 0.02f;
+    [SerializeField] private float intensityMax = 1.0f;
+
+    public List<Enemy> listEnemy;
+    
     public static GameManager Instance {  get; private set; }
 
     private void Awake()
@@ -24,6 +29,8 @@ public class GameManager : MonoBehaviour
 
 
     public void Start() {
+
+        globalLight.intensity = intensityMin;
 
         StartCoroutine(ChangeLightIntensity());
 
@@ -114,12 +121,12 @@ public class GameManager : MonoBehaviour
         while (true) {
             // Đợi 5 giây
             
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(30f);
             AudioManager.Instance.PlaySFX("Thunder Sound");
-            globalLight.intensity = 1;
+            globalLight.intensity = intensityMax;
 
-            yield return new WaitForSeconds(0.5f);
-            globalLight.intensity = 0.04f;
+            yield return new WaitForSeconds(1f);
+            globalLight.intensity = intensityMin;
         }
     }
 }

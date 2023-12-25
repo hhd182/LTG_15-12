@@ -19,7 +19,7 @@ public class LightCollider : MonoBehaviour {
             Vector2 direction = (enemyInLight.transform.position - transform.parent.position).normalized;
             float dynamicDistance = Vector2.Distance(transform.parent.position, enemyInLight.transform.position);
             RaycastHit2D hit = Physics2D.Raycast(transform.parent.position, direction, dynamicDistance, layerMask);
-            //Debug.DrawRay(transform.parent.position, direction * dynamicDistance, Color.white, 2);
+            Debug.DrawRay(transform.parent.position, direction * dynamicDistance, Color.white, 2);
             if (hit.collider != null) {
                 enemyInLight.isSpotted = false;
             }

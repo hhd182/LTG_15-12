@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using BarthaSzabolcs.Tutorial_SpriteFlash;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,9 @@ public class Player : MonoBehaviour, ISavable
     public GameObject batteryBar;
     public GameObject flashlight;
 
-    public int maxHealth = 5;
+    private SimpleFlash simpleFlash;
+
+    [SerializeField] public int maxHealth = 5;
     [SerializeField] int currentHealth = 3;
     public float invincibileTime = 1f;
     private bool isInvincible = false;
@@ -24,15 +27,17 @@ public class Player : MonoBehaviour, ISavable
     public float currentSpeed;
     public bool isSpeed = false;
 
-    private float stamina = 20f;
+    [SerializeField] private float stamina = 20f;
     public float staminaDecreaseRate = 1f;
     public float staminaRecoverRate = 1f;
 
-    private float battery = 100f;
+    [SerializeField] private float battery = 100f;
     public float batteryDecreaseRate = 5f;
 
     private bool flashlightOn = false;
     public bool isSuper = false;
+
+    public AudioSource sfxSound;
 
     private void Awake()
     {
@@ -46,6 +51,8 @@ public class Player : MonoBehaviour, ISavable
         healthBar.GetComponent<HealthBar>().SetHealth(currentHealth);
         staminaBar.GetComponent<StaminaBar>().SetMaxStamina(stamina);
         batteryBar.GetComponent<BatteryBar>().SetMaxBattery(battery);
+
+        simpleFlash = gameObject.GetComponent<SimpleFlash>(); 
 
         flashlightOn = false;
     }
@@ -145,6 +152,8 @@ public class Player : MonoBehaviour, ISavable
         if (!isInvincible)
         {
             currentHealth--;
+            sfxSound.Play();
+            simpleFlash.Flash();
             if (currentHealth < 0)
             {
                 SaveSystem.Instance.Load("saveSlot");
