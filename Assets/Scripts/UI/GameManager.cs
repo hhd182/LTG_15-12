@@ -3,22 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Experimental.Rendering.Universal;
-
+using TMPro;
 
 public class GameManager : MonoBehaviour
-{
+{   
+    //UI
     public GameObject winMenu, pauseMenu;
-
     public Button musicOn, musicOff, sfxOn, sfxOff;
-
     public Slider musicSlider, sfxSlider;
+    public TextMeshProUGUI timeText;
 
+    //Global Light
     public UnityEngine.Rendering.Universal.Light2D globalLight;
-
     [SerializeField] private float intensityMin = 0.02f;
     [SerializeField] private float intensityMax = 1.0f;
 
+    //Time finish the game
+    [SerializeField] private float timeRemaining = 0f;
+    private bool timeIsRunning = true;
+    private bool isPause = false;
+
+    //Global Variable
     public List<Enemy> listEnemy;
+    private string timeFinished;
+
     
     public static GameManager Instance {  get; private set; }
 
@@ -59,19 +67,38 @@ public class GameManager : MonoBehaviour
         sfxSlider.value = sfxVolume;
     }
 
+    private void Update() {
+        if (!isPause) {
+            timeRemaining += Time.deltaTime;
+            Debug.Log(timeRemaining);
+        }
+        else {
+            float minutes = Mathf.FloorToInt(timeRemaining / 60);
+            float seconds = Mathf.FloorToInt(timeRemaining % 60);
+            timeFinished = string.Format("{0:00}:{1:00}", minutes, seconds);
+            timeText.text = "Time: " + timeFinished;
+            Debug.Log("Time finished: " + timeFinished);
+
+        }
+    }
+
     public void Win()
     {
         winMenu.SetActive(true);
+        isPause = true;
+       
         Time.timeScale = 0;
     }
 
     public void Pause() {
         pauseMenu.SetActive(true);
+        isPause = true;
         Time.timeScale = 0;
     }
 
     public void Resume() {
         pauseMenu.SetActive(false);
+        isPause = false;
         Time.timeScale = 1;
     }
 
