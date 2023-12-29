@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
 
     //High Score;
     [SerializeField] private int maxScoreboardEntries = 5;
+    private const string LEVEL = "Level 1";
     private string SavePath => $"{Application.persistentDataPath}/highscores.json";
 
 
@@ -46,8 +47,32 @@ public class GameManager : MonoBehaviour {
 
         globalLight.intensity = intensityMin;
 
-        StartCoroutine(ChangeLightIntensity());
+        StartChangeLightIntensity();
 
+        if (AudioManager.Instance != null) {
+            InitializeAudio();
+        }
+    }
+
+    private void Update() {
+        if (!isPause && !isFinished) {
+            timeRemaining += Time.deltaTime;
+        }
+
+        if (isFinished && !isSaved) {
+            float minutes = Mathf.FloorToInt(timeRemaining / 60);
+            float seconds = Mathf.FloorToInt(timeRemaining % 60);
+            timeFinished = string.Format("{0:00}:{1:00}", minutes, seconds);
+            timeText.text = "Time: " + timeFinished;
+            AddEntry(new ScoreboardEntryData() {
+                entryName = LEVEL,
+                entryScore = timeFinished
+            });
+            isSaved = true;
+        }
+    }
+
+    private void InitializeAudio() {
         float musicVolume = AudioManager.Instance.GetMusicVolume();
         float sfxVolume = AudioManager.Instance.GetSFXVolume();
 
@@ -71,24 +96,6 @@ public class GameManager : MonoBehaviour {
 
         musicSlider.value = musicVolume;
         sfxSlider.value = sfxVolume;
-    }
-
-    private void Update() {
-        if (!isPause && !isFinished) {
-            timeRemaining += Time.deltaTime;
-        }
-
-        if (isFinished && !isSaved) {
-            float minutes = Mathf.FloorToInt(timeRemaining / 60);
-            float seconds = Mathf.FloorToInt(timeRemaining % 60);
-            timeFinished = string.Format("{0:00}:{1:00}", minutes, seconds);
-            timeText.text = "Time: " + timeFinished;
-            AddEntry(new ScoreboardEntryData() {
-                entryName = "Level 1",
-                entryScore = timeFinished
-            });
-            isSaved = true;
-        }
     }
 
     public void AddEntry(ScoreboardEntryData scoreboardEntryData) {
@@ -120,9 +127,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Win() {
-        winMenu.SetActive(true);
-        isFinished = true;
-        Time.timeScale = 0;
+        StartCoroutine(DelayedWin());
     }
 
     public void Pause() {
@@ -149,35 +154,47 @@ public class GameManager : MonoBehaviour {
     }
 
     public void ChangeMusicVolume() {
-        AudioManager.Instance.MusicVolume(musicSlider.value);
+        if (AudioManager.Instance != null) {
+            AudioManager.Instance.MusicVolume(musicSlider.value);
+        }
+
     }
 
     public void ChangeSFXVolume() {
-        AudioManager.Instance.SFXVolume(sfxSlider.value);
+        if (AudioManager.Instance != null) {
+            AudioManager.Instance.SFXVolume(sfxSlider.value);
+        }
+
     }
 
     public void ToggleMusic() {
-        AudioManager.Instance.ToggleMusic();
-        if (AudioManager.Instance.musicPlaying) {
-            musicOn.gameObject.SetActive(true);
-            musicOff.gameObject.SetActive(false);
+        if (AudioManager.Instance != null) {
+            AudioManager.Instance.ToggleMusic();
+            if (AudioManager.Instance.musicPlaying) {
+                musicOn.gameObject.SetActive(true);
+                musicOff.gameObject.SetActive(false);
+            }
+            else {
+                musicOn.gameObject.SetActive(false);
+                musicOff.gameObject.SetActive(true);
+            }
         }
-        else {
-            musicOn.gameObject.SetActive(false);
-            musicOff.gameObject.SetActive(true);
-        }
+
     }
 
     public void ToggleSFX() {
-        AudioManager.Instance.ToggleSFX();
-        if (AudioManager.Instance.sfxPlaying) {
-            sfxOn.gameObject.SetActive(true);
-            sfxOff.gameObject.SetActive(false);
+        if (AudioManager.Instance != null) {
+            AudioManager.Instance.ToggleSFX();
+            if (AudioManager.Instance.sfxPlaying) {
+                sfxOn.gameObject.SetActive(true);
+                sfxOff.gameObject.SetActive(false);
+            }
+            else {
+                sfxOn.gameObject.SetActive(false);
+                sfxOff.gameObject.SetActive(true);
+            }
         }
-        else {
-            sfxOn.gameObject.SetActive(false);
-            sfxOff.gameObject.SetActive(true);
-        }
+
     }
 
     private ScoreboardSaveData GetSavedScores() {
@@ -199,8 +216,16 @@ public class GameManager : MonoBehaviour {
             stream.Write(json);
         }
     }
-
-    IEnumerator ChangeLightIntensity() {
+    private void StartChangeLightIntensity() {
+        StartCoroutine(ChangeLightIntensity());
+    }
+    private IEnumerator DelayedWin() {
+        yield return new WaitForSeconds(0.1f);
+        winMenu.SetActive(true);
+        isFinished = true;
+        Time.timeScale = 0;
+    }
+    private IEnumerator ChangeLightIntensity() {
         while (true) {
             // Đợi 5 giây
 
