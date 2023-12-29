@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Experimental.Rendering.Universal;
 using TMPro;
+using DapperDino.Scoreboards;
+using System.IO;
 
-public class GameManager : MonoBehaviour
-{   
+public class GameManager : MonoBehaviour {
     //UI
     public GameObject winMenu, pauseMenu;
     public Button musicOn, musicOff, sfxOn, sfxOff;
@@ -20,18 +21,23 @@ public class GameManager : MonoBehaviour
 
     //Time finish the game
     [SerializeField] private float timeRemaining = 0f;
-    private bool timeIsRunning = true;
+    private bool isFinished = false;
     private bool isPause = false;
+    private bool isSaved = false;
 
     //Global Variable
     public List<Enemy> listEnemy;
     private string timeFinished;
 
-    
-    public static GameManager Instance {  get; private set; }
+    //High Score;
+    [SerializeField] private int maxScoreboardEntries = 5;
+    private string SavePath => $"{Application.persistentDataPath}/highscores.json";
 
-    private void Awake()
-    {
+
+
+    public static GameManager Instance { get; private set; }
+
+    private void Awake() {
         Instance = this;
     }
 
@@ -68,31 +74,61 @@ public class GameManager : MonoBehaviour
     }
 
     private void Update() {
-        if (!isPause) {
+        if (!isPause && !isFinished) {
             timeRemaining += Time.deltaTime;
-            Debug.Log(timeRemaining);
         }
-        else {
+
+        if (isFinished && !isSaved) {
             float minutes = Mathf.FloorToInt(timeRemaining / 60);
             float seconds = Mathf.FloorToInt(timeRemaining % 60);
             timeFinished = string.Format("{0:00}:{1:00}", minutes, seconds);
             timeText.text = "Time: " + timeFinished;
-            Debug.Log("Time finished: " + timeFinished);
-
+            AddEntry(new ScoreboardEntryData() {
+                entryName = "Level 1",
+                entryScore = timeFinished
+            });
+            isSaved = true;
         }
     }
 
-    public void Win()
-    {
+    public void AddEntry(ScoreboardEntryData scoreboardEntryData) {
+        ScoreboardSaveData savedScores = GetSavedScores();
+
+
+        bool scoreAdded = false;
+
+        //Check if the score is high enough to be added.
+        for (int i = 0; i < savedScores.highscores.Count; i++) {
+            if (string.Compare(scoreboardEntryData.entryScore, savedScores.highscores[i].entryScore) < 0) {
+                savedScores.highscores.Insert(i, scoreboardEntryData);
+                scoreAdded = true;
+                break;
+            }
+        }
+
+        //Check if the score can be added to the end of the list.
+        if (!scoreAdded && savedScores.highscores.Count < maxScoreboardEntries) {
+            savedScores.highscores.Add(scoreboardEntryData);
+        }
+
+        //Remove any scores past the limit.
+        if (savedScores.highscores.Count > maxScoreboardEntries) {
+            savedScores.highscores.RemoveRange(maxScoreboardEntries, savedScores.highscores.Count - maxScoreboardEntries);
+        }
+
+        SaveScores(savedScores);
+    }
+
+    public void Win() {
         winMenu.SetActive(true);
-        isPause = true;
-       
+        isFinished = true;
         Time.timeScale = 0;
     }
 
     public void Pause() {
         pauseMenu.SetActive(true);
         isPause = true;
+        Debug.Log("Pausing");
         Time.timeScale = 0;
     }
 
@@ -144,10 +180,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private ScoreboardSaveData GetSavedScores() {
+        if (!File.Exists(SavePath)) {
+            File.Create(SavePath).Dispose();
+            return new ScoreboardSaveData();
+        }
+
+        using (StreamReader stream = new StreamReader(SavePath)) {
+            string json = stream.ReadToEnd();
+
+            return JsonUtility.FromJson<ScoreboardSaveData>(json);
+        }
+    }
+
+    private void SaveScores(ScoreboardSaveData scoreboardSaveData) {
+        using (StreamWriter stream = new StreamWriter(SavePath)) {
+            string json = JsonUtility.ToJson(scoreboardSaveData, true);
+            stream.Write(json);
+        }
+    }
+
     IEnumerator ChangeLightIntensity() {
         while (true) {
             // Đợi 5 giây
-            
+
             yield return new WaitForSeconds(30f);
             AudioManager.Instance.PlaySFX("Thunder Sound");
             globalLight.intensity = intensityMax;

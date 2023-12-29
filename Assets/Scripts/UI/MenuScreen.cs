@@ -37,9 +37,9 @@ public class MenuScene : MonoBehaviour
             sfxOff.gameObject.SetActive(true);
         }
 
-        settingScreen.SetActive(false); 
-        firstTimeScreen.SetActive(false);
-        highScroceScreen.SetActive(false);  
+        //settingScreen.SetActive(false); 
+        //firstTimeScreen.SetActive(false);
+        //highScroceScreen.SetActive(false);  
     }
 
     public void DoOpenScene(GameObject screen) {
