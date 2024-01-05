@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour, ISavable
 
     public Light2D globalLight;
 
-    public int health;
+    public float health;
     public bool defeated = false;
 
     public Transform[] patrolPoints;
@@ -86,9 +86,9 @@ public class Enemy : MonoBehaviour, ISavable
             timeInLight += Time.deltaTime;
             if (timeInLight >= maxTimeInLight)
             {
-                SubtractHealth(1);
+                SubtractHealth(0.5f);
 
-                timeInLight = 0f;
+                timeInLight -= 0.5f;
             }
         }
         else
@@ -164,7 +164,7 @@ public class Enemy : MonoBehaviour, ISavable
         timeInLight = 0f;
     }
 
-    private void SubtractHealth(int damage)
+    private void SubtractHealth(float damage)
     {
         health -= damage;
         this.PlaySFX("Hurt");
