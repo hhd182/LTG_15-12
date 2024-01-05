@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class MenuScene : MonoBehaviour
 {
-    public GameObject mainScreen, settingScreen, firstTimeScreen, highScroceScreen;
+    public GameObject mainScreen, settingScreen, firstTimeScreen, highScroceScreen, sliderScreen;
 
-    public Button musicOn, musicOff, sfxOn, sfxOff, btnYes, btnNo;
+    public Button musicOn, musicOff, sfxOn, sfxOff, btnYes, btnNo, btnStart;
 
     public Slider musicSLider, sfxSlider;
 
@@ -48,11 +48,20 @@ public class MenuScene : MonoBehaviour
         mainScreen.SetActive(false);
     }
 
+    public void DoOpenTutorial() {
+        mainScreen.SetActive(false) ;
+        firstTimeScreen.SetActive(false);
+        btnStart.gameObject.SetActive(true);
+        sliderScreen.SetActive(true);
+    }
+
     public void DoCloseScene() {
         mainScreen.SetActive(true );
         settingScreen.SetActive(false);
         firstTimeScreen.SetActive(false);
         highScroceScreen.SetActive(false);
+        sliderScreen.SetActive(false);
+        btnStart.gameObject.SetActive(false);
     }
 
     public void ToggleMusic() {
